@@ -75,9 +75,20 @@ const mergeSort = array => {
 }
 
 const quickSort = array => {
-  const results = [...array]
+  
+  if ( array.length < 2 ) {
+    return array
+  }
 
-  return bubbleSort(results)
+  const pivot = array.pop()
+  const low = [], high = []
+
+  array.forEach( element => {
+    const arr = element < pivot ? low : high
+    arr.push( element )
+  });
+
+  return [ ...quickSort(low), pivot, ...quickSort(high) ]
 }
 
 module.exports = { bubbleSort, insertionSort, mergeSort, quickSort }
