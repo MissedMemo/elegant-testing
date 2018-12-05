@@ -15,7 +15,7 @@ const bubbleSort = array => {
         swapped = true;
       }
 
-      /* (alternative syntax)
+      /* ( alternative syntax ...)
       if ( results[i] > results[i+1] ) {
         let temp = results[i]
         results[i] = results[i+1]
@@ -45,12 +45,33 @@ const insertionSort = array => {
   return results
 }
 
+const merge = (left, right) => {
+
+  let merged = []
+
+  while( left.length && right.length ) {
+    merged.push( left[0] < right[0] ? left.shift() : right.shift() )
+  }
+
+  // ( alternative syntax... )
+  //return merged.concat( left, right )
+  //return [].concat.call( merged, left, right )
+  //return Array.prototype.concat.apply( [], [merged,left,right] )
+
+  return [ ...merged, ...left, ...right ] // either L or R will be empty 
+}
+
 const mergeSort = array => {
-  const results = [...array]
-
   
+  if ( array.length < 2 ) {
+    return array
+  }
 
-  return bubbleSort(results)
+  const iMiddle = Math.floor( array.length/2 )
+  const left = array.slice( 0, iMiddle )
+  const right = array.slice( iMiddle )
+
+  return merge( mergeSort(left), mergeSort(right) )
 }
 
 const quickSort = array => {
