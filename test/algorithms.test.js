@@ -41,20 +41,27 @@ describe( 'sorting algorithms...', () => {
 describe( 'binary search', () => {
 
   const consecutiveNumberSeries = [1,2,3,4,5,6,7,8,9,10]
+  const seriesContainingGaps = [1,3,4,7,11,18,24,59,92,165]
+  const missingGapValues = [ 2, 6, 12, 27, 63, 245 ]
+  const negativeValuesAndZero = [-5, -2, -1, 0, 2, 5, 92 ]
+  const nonsense = [ 'A', -32, 'abc', 32456 ]
 
-  const testEveryElement = array => {
-    return null
+  const testAll = (array, elementsToTest = array ) => {
+    elementsToTest.forEach( element => {
+      const result = _.binarySearch( array, element )
+      const i = array.indexOf( element )
+      expect(result).toBe( i === -1 ? null : i )
+    })
   }
 
   test( 'return index of specified value in sorted array', () => {
-    //testEveryElement( consecutiveNumberSeries )
-    const result = _.binarySearch( consecutiveNumberSeries, 4 )
-    const index = consecutiveNumberSeries.indexOf( 4 )
-    expect(result).toBe(index)
+    testAll( consecutiveNumberSeries )
+    testAll( seriesContainingGaps )
+    testAll( negativeValuesAndZero )
   })
 
-  test( 'return null if specified value is not present', () => {
-    const result = _.binarySearch( consecutiveNumberSeries, 25 )
-    expect(result).toBe(null)
+  test( 'return null if specified value is NOT present', () => {
+    testAll( consecutiveNumberSeries, nonsense )
+    testAll( seriesContainingGaps, missingGapValues )
   })
 })
