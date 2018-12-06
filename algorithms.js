@@ -112,4 +112,7 @@ const binarySearch = ( sortedArray, elementToFind ) => {
   return findInRange( 0, sortedArray.length -1 )
 }
 
-module.exports = { bubbleSort, insertionSort, mergeSort, quickSort, binarySearch }
+const factorial = n =>
+  n < 2 ? 1 : n * factorial( n - 1 )
+
+module.exports = { bubbleSort, insertionSort, mergeSort, quickSort, binarySearch, factorial }
