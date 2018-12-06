@@ -40,12 +40,6 @@ describe( 'sorting algorithms...', () => {
 
 describe( 'binary search', () => {
 
-  const consecutiveNumberSeries = [1,2,3,4,5,6,7,8,9,10]
-  const seriesContainingGaps = [1,3,4,7,11,18,24,59,92,165]
-  const missingGapValues = [ 2, 6, 12, 27, 63, 245 ]
-  const negativeValuesAndZero = [-5, -2, -1, 0, 2, 5, 92 ]
-  const nonsense = [ 'A', -32, 'abc', 32456 ]
-
   const testAll = (array, elementsToTest = array ) => {
     elementsToTest.forEach( element => {
       const result = _.binarySearch( array, element )
@@ -54,14 +48,33 @@ describe( 'binary search', () => {
     })
   }
 
-  test( 'return index of specified value in sorted array', () => {
-    testAll( consecutiveNumberSeries )
-    testAll( seriesContainingGaps )
-    testAll( negativeValuesAndZero )
+  describe( 'return index of specified value in sorted array', () => {
+
+    test( 'find elements in a consecutive number series', () => {
+      testAll( [1,2,3,4,5,6,7,8,9,10] )
+    })
+
+    test( 'find elements in a series containing gaps', () => {
+      testAll( [1,3,4,7,11,18,24,59,92,165] )
+    })
+
+    test( 'find elements in a series containing negative values and zero', () => {
+      testAll( [-5, -2, -1, 0, 2, 5, 92 ] )
+    })
   })
 
-  test( 'return null if specified value is NOT present', () => {
-    testAll( consecutiveNumberSeries, nonsense )
-    testAll( seriesContainingGaps, missingGapValues )
+  describe( 'handle searches for missing or invalid values', () => {
+
+    test( 'return null if specified value is NOT present', () => {
+      const missingValues = [ 2, 6, 12, 27, 63, 245 ]
+      testAll( [1,2,3,4,5,6,7,8,9,10], missingValues )
+    })
+  
+    test( 'return null when checking for invalid values', () => {
+      const nonsenseValues = [ 'A', {}, 'abc' ]
+      testAll( [1,2,3,4,5,6,7,8,9,10], nonsenseValues )
+    })
+
   })
+
 })
