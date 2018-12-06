@@ -1,4 +1,5 @@
 const _ = require('../algorithms')
+const mathjs = require('mathjs') // to test factorial
 
 describe( 'sorting algorithms...', () => {
 
@@ -81,23 +82,14 @@ describe( 'binary search', () => {
 
 describe( 'n factorial', () => {
 
-  test( 'zero should equate to 1', () => {
-    const result = _.factorial(0)
-    expect( result ).toBe(1)
+  const testCases = [0,1,5,10]
+
+  testCases.forEach( n => {
+    const actual = mathjs.factorial(n) // safe?
+    test( `${n} should equate to ${actual}`, () => {
+      const result = _.factorial(n)
+      expect( result ).toBe(actual)
+    })
   })
 
-  test( '1 should equate to 1', () => {
-    const result = _.factorial(1)
-    expect( result ).toBe(1)
-  })
-
-  test( '5 should equate to 120', () => {
-    const result = _.factorial(5)
-    expect( result ).toBe(120)
-  })
-
-  test( '10 should equate to 3.6288E+6', () => {
-    const result = _.factorial(10)
-    expect( result ).toBe(3.6288E+6)
-  })
 })
