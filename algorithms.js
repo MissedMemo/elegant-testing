@@ -92,8 +92,24 @@ const quickSort = array => {
 }
 
 const binarySearch = ( sortedArray, elementToFind ) => {
-  const index = sortedArray.indexOf( elementToFind )
-  return index === -1 ? null : index
+
+  const findInRange = ( iMin, iMax ) => {
+
+    if ( iMin > iMax )
+      return null // element not contained in array
+
+    const iMid = iMin + Math.floor( (iMax - iMin)/2 )
+    const value = sortedArray[ iMid ]
+
+    if ( value === elementToFind )
+      return iMid
+    else if ( value > elementToFind )
+      return findInRange( iMin, iMid - 1 )
+    else
+      return findInRange( iMid + 1, iMax )
+  }
+  
+  return findInRange( 0, sortedArray.length -1 )
 }
 
 module.exports = { bubbleSort, insertionSort, mergeSort, quickSort, binarySearch }
