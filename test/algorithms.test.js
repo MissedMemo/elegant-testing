@@ -36,3 +36,25 @@ describe( 'sorting algorithms...', () => {
   })
 
 })
+
+
+describe( 'binary search', () => {
+
+  const consecutiveNumberSeries = [1,2,3,4,5,6,7,8,9,10]
+
+  const testEveryElement = array => {
+    return null
+  }
+
+  test( 'return index of specified value in sorted array', () => {
+    //testEveryElement( consecutiveNumberSeries )
+    const result = _.binarySearch( consecutiveNumberSeries, 4 )
+    const index = consecutiveNumberSeries.indexOf( 4 )
+    expect(result).toBe(index)
+  })
+
+  test( 'return null if specified value is not present', () => {
+    const result = _.binarySearch( consecutiveNumberSeries, 25 )
+    expect(result).toBe(null)
+  })
+})

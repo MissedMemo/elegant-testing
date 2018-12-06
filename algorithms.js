@@ -91,4 +91,9 @@ const quickSort = array => {
   return [ ...quickSort(low), pivot, ...quickSort(high) ]
 }
 
-module.exports = { bubbleSort, insertionSort, mergeSort, quickSort }
+const binarySearch = ( sortedArray, elementToFind ) => {
+  const index = sortedArray.indexOf( elementToFind )
+  return index === -1 ? null : index
+}
+
+module.exports = { bubbleSort, insertionSort, mergeSort, quickSort, binarySearch }
