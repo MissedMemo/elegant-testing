@@ -1,5 +1,5 @@
 const _ = require('../algorithms')
-const mathjs = require('mathjs') // to test factorial
+const mathjs = require('mathjs') // standard Math lib does not support factorial
 
 describe( 'sorting algorithms...', () => {
 
